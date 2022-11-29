@@ -38,7 +38,9 @@ RUN \
     # install kustomize
     ln -s /opt/kustomize/kustomize /usr/local/bin/kustomize && \
     # install argocd
-    ln -s /opt/argocd/argocd /usr/local/bin/argocd && \    
+    ln -s /opt/argocd/argocd /usr/local/bin/argocd && \
+    # install yq
+    ln -s /opt/yq/yq /usr/local/bin/yq && \    
     # install bash completions
     kubectl completion bash > $COMPDIR/kubectl && \
     oc completion bash > $COMPDIR/oc && \

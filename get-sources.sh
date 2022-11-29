@@ -121,6 +121,13 @@ chmod a+x "$CONTAINER_OPT_DIR/argocd/argocd"
 rm -rf "${TMPDIR:?}"/*
 chmod -R +x "${CONTAINER_USR_BIN_DIR}"
 
+echo "Downloading yq ${YQ_VERSION}"
+mkdir -p "$CONTAINER_OPT_DIR/yq/"
+wget -q -O "$CONTAINER_OPT_DIR/yq/yq" https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION}/yq_linux_amd64
+chmod a+x "$CONTAINER_OPT_DIR/yq/yq"
+rm -rf "${TMPDIR:?}"/*
+chmod -R +x "${CONTAINER_USR_BIN_DIR}"
+
 cd "$PROJECT_ROOT"
 tar -czf container-root-x86_64.tgz -C "$CONTAINER_ROOT_RELATIVE_PATH" .
 if [[ "$updateSourcesFlag" = "true" ]]; then
@@ -142,6 +149,7 @@ rm -f rh-manifest.txt || true
   echo "submariner ${SUBMARINER_VERSION} https://github.com/submariner-io/subctl/tree/v${SUBMARINER_VERSION}"
   echo "kubevirt ${KUBEVIRT_VERSION} https://github.com/kubevirt/kubevirt/tree/v${KUBEVIRT_VERSION}"
   echo "argocd ${ARGOCD_VERSION} https://github.com/argocd/tree/v${ARGOCD_VERSION}"
+  echo "yq ${YQ_VERSION} https://github.com/mikefarah/yq/tree/v${YQ_VERSION}"
 } >> rh-manifest.txt
 
 rm -rf "$CONTAINER_ROOT_DIR"
