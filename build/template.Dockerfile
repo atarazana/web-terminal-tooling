@@ -37,12 +37,15 @@ RUN \
     ln -s /opt/kubevirt/virtctl /usr/local/bin/virtctl && \
     # install kustomize
     ln -s /opt/kustomize/kustomize /usr/local/bin/kustomize && \
+    # install argocd
+    ln -s /opt/argocd/argocd /usr/local/bin/argocd && \    
     # install bash completions
     kubectl completion bash > $COMPDIR/kubectl && \
     oc completion bash > $COMPDIR/oc && \
     kn completion bash > $COMPDIR/kn && \
     helm completion bash > $COMPDIR/helm && \
     tkn completion bash > $COMPDIR/tkn && \
+    argocd completion bash > $COMPDIR/argocd && \
     virtctl completion bash > $COMPDIR/virtctl && \
     rhoas completion bash > $COMPDIR/rhoas && \
     subctl completion bash > $COMPDIR/subctl
