@@ -1,0 +1,30 @@
+apiVersion: workspace.devfile.io/v1alpha2
+kind: DevWorkspaceTemplate
+metadata:
+  annotations:
+    controller.devfile.io/allow-import-from: '*'
+  name: web-terminal-tooling
+  namespace: openshift-operators
+  labels:
+    console.openshift.io/terminal: 'true'
+spec:
+  components:
+    - container:
+        cpuRequest: 100m
+        memoryRequest: 128Mi
+        sourceMapping: /projects
+        cpuLimit: 400m
+        volumeMounts:
+          - name: scratch
+            path: /home/user/scratch
+        memoryLimit: 256Mi
+        image: quay.io/atarazana/web-terminal-tooling:1.0.0
+        args:
+          - tail
+          - '-f'
+          - /dev/null
+        mountSources: false
+      name: web-terminal-tooling
+    - name: scratch
+      volume:
+        size: 1G
